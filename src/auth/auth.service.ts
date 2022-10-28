@@ -22,7 +22,6 @@ export class AuthService {
 
      async registUser(dto : CreateUserDto) {
         const db_user = await this.userService.findByEmail(dto.email)
-        console.log(db_user)
         if(db_user){
             throw new BadRequestException('User with this email already exists')
         }
