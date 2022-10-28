@@ -12,7 +12,7 @@ export const DB_CONFIG : TypeOrmModuleOptions = {
     entities: ['dist/**/*.entity{.ts,.js}'],
     autoLoadEntities: true,
     synchronize: true,
-    // ssl : {
-    //     rejectUnauthorized: false
-    // }
+    ssl : {
+        rejectUnauthorized: true
+    }
 }
