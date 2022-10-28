@@ -21,6 +21,6 @@ export class ReviewService {
         const user = await this.UsersService.findById(dto.user_id)
         dto.user_name = user.fullName
         
-        
+        return user
     }
 }
