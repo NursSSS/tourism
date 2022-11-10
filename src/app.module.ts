@@ -12,7 +12,7 @@ import { ReviewModule } from './review/review.module';
     UsersModule,
     AuthModule,
     PlaceModule,
-    ReviewModule
+    ReviewModule,
   ]
 })
 export class AppModule {}

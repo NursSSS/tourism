@@ -1,4 +1,4 @@
-import { BadRequestException, NotFoundException, Injectable } from '@nestjs/common';
+import { NotFoundException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreatePlaceDto, UpdatePlaceDto } from './dto';
@@ -133,7 +133,7 @@ export class PlaceService {
         await this.PlaceEnRepository.delete({ place_id: place.id })
         await this.PlaceRepository.delete(id)
 
-        return {message: 'Place sucessfully deleted'}
+        return { message: 'Place sucessfully deleted' }
     }
 
 }

@@ -38,8 +38,6 @@ export class AuthController {
     }
 
     @ApiOperation({summary : 'to recover your password'})
-    @Role(UserRole.ADMIN, UserRole.SUPERADMIN,UserRole.USER)
-    @UseGuards(RoleGuard)
     @Post('/recoverPass')
     async recoverPass(@Body() dto: RecoverPassDto) {
         return await this.service.recoverPass(dto)

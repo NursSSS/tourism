@@ -1,5 +1,6 @@
 import { Controller, Get, Put, Body, Delete, Param, UseGuards } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiBearerAuth, ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { RoleGuard } from '../auth/guard/role-guard';
 import { UpdateUserDto } from './dto';
 import { UserRole, UsersEntity } from './entities';
@@ -17,6 +18,7 @@ export class UsersController {
     @ApiForbiddenResponse({ description: 'No access' })
     @Role(UserRole.SUPERADMIN)
     @UseGuards(RoleGuard)
+    @UseGuards(JwtAuthGuard)
     async findAll(){
         return await this.UsersService.findAll()
     }
@@ -27,6 +29,7 @@ export class UsersController {
     @ApiBadRequestResponse({ description: 'Validation error' })
     @Role(UserRole.ADMIN, UserRole.SUPERADMIN,UserRole.USER)
     @UseGuards(RoleGuard)
+    @UseGuards(JwtAuthGuard)
     async updateUser(@Body() dto: UpdateUserDto){
         return await this.UsersService.updateUser(dto)
     }
@@ -36,6 +39,7 @@ export class UsersController {
     @ApiForbiddenResponse({ description: 'No access' })
     @Role(UserRole.SUPERADMIN)
     @UseGuards(RoleGuard)
+    @UseGuards(JwtAuthGuard)
     async findAdmins(){
         return await this.UsersService.findAdmins()
     }
@@ -46,6 +50,7 @@ export class UsersController {
     // @ApiForbiddenResponse({ description: 'No access' })
     // @Role(UserRole.ADMIN, UserRole.SUPERADMIN)
     // @UseGuards(RoleGuard)
+    @UseGuards(JwtAuthGuard)
     async deleteUser(@Param('id') id: number){
         return await this.UsersService.deleteUser(id)
     }
@@ -57,6 +62,7 @@ export class UsersController {
     @ApiForbiddenResponse({ description: 'No access' })
     @Role(UserRole.SUPERADMIN)
     @UseGuards(RoleGuard)
+    @UseGuards(JwtAuthGuard)
     async deleteAdmin(@Param('id') id: number){
         return await this.UsersService.deleteAdmin(id)
     }

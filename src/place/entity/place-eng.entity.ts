@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { CategoryEn } from "../enum";
 import { PlaceEntity } from "./place.entity";
 
@@ -25,7 +25,7 @@ export class PlaceEnEntity{
     @Column()
     category: CategoryEn
 
-    @ApiProperty()
     @OneToOne(() => PlaceEntity, place => place.en)
+    @JoinTable()
     place: PlaceEntity
 }

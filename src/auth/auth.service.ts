@@ -16,11 +16,11 @@ export class AuthService {
         @InjectRepository(UsersEntity) 
         private readonly UserRepository: Repository<UsersEntity> ,
         private jwtService: JwtService,
-       private userService: UsersService
+        private userService: UsersService
     ) {}
 
 
-     async registUser(dto : CreateUserDto) {
+    async registUser(dto : CreateUserDto) {
         const db_user = await this.userService.findByEmail(dto.email)
         if(db_user){
             throw new BadRequestException('User with this email already exists')
@@ -30,7 +30,7 @@ export class AuthService {
        return await this.userService.createUser(user, user.role)
     }
     
-     async registAdmin(dto : CreateUserDto) {
+    async registAdmin(dto : CreateUserDto) {
         const db_user = await this.userService.findByEmail(dto.email)
         if(db_user){
             throw new BadRequestException('admin with this email already exists')
@@ -82,8 +82,9 @@ export class AuthService {
             message:"user was successfully activated"
         }
     }
-     async login (user: loginUserDto) {
-     const user2 = await this.userService.findByEmail(user.email)
+
+    async login (user: loginUserDto) {
+    const user2 = await this.userService.findByEmail(user.email)
 
         if(!user2) {
             throw new BadRequestException('user email is incorrect')
@@ -98,6 +99,7 @@ export class AuthService {
 
         return this.generateToken(user2)
     }
+
     private async generateToken(user: UsersEntity) {
         const payLoad = { id: user.id, email: user.email, role: user.role}
         
@@ -105,7 +107,8 @@ export class AuthService {
             token: this.jwtService.sign(payLoad)
         }
     }
-     async recoverPass(dto: RecoverPassDto){
+
+    async recoverPass(dto: RecoverPassDto){
         const db_user = await this.userService.findByEmail(dto.email)
         if(!db_user){
             throw new NotFoundException('User is not found')
