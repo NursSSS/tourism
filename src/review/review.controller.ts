@@ -1,5 +1,5 @@
 import { Controller, Body, Post, Get, Param, Put, UseGuards, Delete } from '@nestjs/common';
-import { ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiResponse } from '@nestjs/swagger';
+import { ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiResponse, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { RoleGuard } from 'src/auth/guard/role-guard';
 import { UserRole } from 'src/users/entities';
@@ -8,6 +8,8 @@ import { CreateReviewDto, UpdateReviewDto } from './dto';
 import { ReviewEntity } from './entities';
 import { ReviewService } from './review.service';
 
+@ApiBearerAuth()
+@ApiTags('Review')
 @Controller(':lang/review')
 export class ReviewController {
     constructor(private ReviewService: ReviewService){}
